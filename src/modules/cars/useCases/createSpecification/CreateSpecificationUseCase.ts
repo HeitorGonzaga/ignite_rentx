@@ -1,5 +1,6 @@
 import { ICreateSpecificationDTO, ISpecificationsRepository } from "../../repositories/ISpecificationsRepository";
 import {inject, injectable} from 'tsyringe';
+import { AppError } from "../../../../errors/AppError";
 
 interface IRequestDTO{
     name: string;
@@ -15,7 +16,7 @@ class CreateSpecificationUseCase{
     async execute({name, description}: IRequestDTO): Promise<void>{
         const specificationAlreadyExists = await this.specificationRepository.findByName(name);
         if(specificationAlreadyExists){
-            throw new Error('Specification already exists!');
+            throw new AppError('Specification already exists!');
         } 
         await this.specificationRepository.create({name, description});
     }
