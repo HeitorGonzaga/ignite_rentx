@@ -1,10 +1,10 @@
 import {inject, injectable} from 'tsyringe';
-import { IUsersRepository } from '../../repostories/IUsersRepository';
+import { IUsersRepository } from '@modules/accounts/repostories/IUsersRepository';
 
 import {sign} from 'jsonwebtoken';
 
 import { compare, compareSync} from 'bcryptjs';
-import { AppError } from '../../../../errors/AppError';
+import { AppError } from '@shared/errors/AppError';
 
 interface IRequest{
     email: string;
@@ -37,7 +37,6 @@ class AuthenticateUserUseCase{
         }
 
         const passwordMatch = compareSync(password, user.password);
-
         if(!passwordMatch){
             throw new AppError("Email or password incorrect!");
         }

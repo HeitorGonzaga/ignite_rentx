@@ -1,15 +1,18 @@
 import {inject, injectable} from 'tsyringe';
 import {hashSync} from 'bcryptjs';
-import { ICreateUserDTO } from '../../DTO/ICreateUserDTO';
-import {UserRepository} from '../../repostories/implementations/UsersRepository';
-import { AppError } from '../../../../errors/AppError';
+import { IUsersRepository } from '@modules/accounts/repostories/IUsersRepository';
+import { ICreateUserDTO } from '@modules/accounts/DTO/ICreateUserDTO';
+import { AppError } from '@shared/errors/AppError';
+
+
+
 
 @injectable()
 class CreateUserUseCase {
 
     constructor(
         @inject('UserRepository')
-        private usersRepository: UserRepository 
+        private usersRepository: IUsersRepository 
     ){
 
     }
